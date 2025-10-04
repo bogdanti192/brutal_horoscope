@@ -241,20 +241,20 @@
           <div class="logo">BH</div>
           <div>
             <h1>Brutālais Horoskops</h1>
-            <p>Оскорбительный, но честный</p>
+            <p>Skarbs, bet godīgs</p>
           </div>
         </div>
         <nav>
-          <button class="btn-ghost" onclick="openAbout()">О проекте</button>
+          <button class="btn-ghost" onclick="openAbout()">Par projektu</button>
         </nav>
       </header>
 
       <main class="hero">
         <section class="card intro">
-          <h2>Хочешь правду? Получай.</h2>
+          <h2>Gribi patiesību? Saņem to.</h2>
           <p>
-            Выбери знак — и получи искромётный, слегка злой, но честный
-            гороскоп. Для настроения и мемов.
+            Izvēlies zīmi — un saņem asprātīgu, nedaudz skarbu, bet godīgu
+            horoskopu. Izklaidei un memiem.
           </p>
 
           <div class="signs-grid" id="signsGrid">
@@ -262,7 +262,7 @@
             <button class="sign" data-sign="{{ s[0] }}">
               <div class="emoji">{{ s[1] }}</div>
               <b>{{ s[0] }}</b>
-              <small>Нажми</small>
+              <small>Nospied</small>
             </button>
             {% endfor %}
           </div>
@@ -272,49 +272,23 @@
           <div class="card">
             <div class="tone-row">
               <div style="flex: 1">
-                <strong>Тон</strong>
+                <strong>Tonis</strong>
                 <div style="color: var(--muted); font-size: 12px">
-                  Выбери как жестко шутить
+                  Izvēlies, cik skarbi jokot
                 </div>
               </div>
               <div class="tone-toggle" role="tablist">
-                <button class="active" data-tone="light">Лёгкий</button>
-                <button data-tone="normal">Обычный</button>
-                <button data-tone="hard">Жёсткий</button>
+                <button class="active" data-tone="light">Viegls</button>
+                <button data-tone="normal">Normāls</button>
+                <button data-tone="hard">Skarbs</button>
               </div>
             </div>
 
             <div class="preview" id="preview">
               <div style="text-align: center; color: var(--muted)">
-                Выбери знак →
+                Izvēlies zīmi →
               </div>
             </div>
           </div>
 
-          <div class="result-card card" id="resultCard" style="display: none">
-            <h3 id="resSign">Овен</h3>
-            <p id="resText">
-              Тут будет саркастичный гороскоп для выбранного знака.
-            </p>
-            <div class="meta">
-              <div id="resRate">Сарказм: 72/100</div>
-              <div id="resHint" style="font-size: 13px; color: var(--muted)">
-                Сгенерировано сервером
-              </div>
-            </div>
-            <div class="actions">
-              <button class="btn primary" id="againBtn">Ещё раз</button>
-              <button class="btn ghost" id="shareBtn">Поделиться</button>
-            </div>
-          </div>
-        </aside>
-      </main>
-
-      <footer>
-        © Brutālais Horoskops — просто для развлечения. Не воспринимать всерьёз.
-      </footer>
-    </div>
-
-    <script src="{{ url_for('static', filename='main.js') }}"></script>
-  </body>
-</html>
+          <div class="
