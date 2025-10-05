@@ -52,23 +52,23 @@ def close_connection(exception):
 
 # --- Utilities ---
 SIGNS = [
-  ['Auns','♈'],['Vērsis','♉'],['Dvīņi','♊'],['Vēzis','♋'],['Lauva','♌'],['Jaunava','♍'],
-  ['Svari','♎'],['Skorpions','♏'],['Strēlnieks','♐'],['Mežāzis','♑'],['Ūdensvīrs','♒'],['Zivis','♓']
+  ['Овен','♈'],['Телец','♉'],['Близнецы','♊'],['Рак','♋'],['Лев','♌'],['Дева','♍'],
+  ['Весы','♎'],['Скорпион','♏'],['Стрелец','♐'],['Козерог','♑'],['Водолей','♒'],['Рыбы','♓']
 ]
 
 # Simple generator templates (kept safe: no hate speech / no sexual content)
 TEMPLATES = {
     'light': [
-        "{sign} — šodien mājīgums ir svarīgāks par visu. Izturies tā, it kā tev būtu plāns.",
-        "{sign} — kafija palīdzēs. Ja nepalīdz — apēd cepumu un izturies kā gudrinieks."
+        "{sign} — сегодня уют превыше всего. Сделай вид, что у тебя план.",
+        "{sign} — кофе поможет. А если нет — съешь печенье и притворись мудрецом."
     ],
     'normal': [
-        "{sign} — tev izdosies, ja pats sev netraucēsi. Izdari pauzi.",
-        "{sign} — nav grūti būt labākam nekā vakar — nedaudz pūļu, un sarkasms izslēgsies."
+        "{sign} — у тебя получится, если не мешать самому себе. То есть сделай паузу.",
+        "{sign} — несложно быть лучше вчера — немного усилий и сарказм выключается."
     ],
     'hard': [
-        "{sign} — tava enerģija iespaido. Mazliet apslāpē liesmu, lai nenodedzinātu mēbeles.",
-        "{sign} — ja impulsivitāti maksātu, tu dzīvotu citā valstī."
+        "{sign} — твоя энергия впечатляет. Немного потуши огонь, чтобы не поджечь мебель.",
+        "{sign} — если бы импульсивность платили, ты бы жил в другой стране."
     ]
 }
 
@@ -86,9 +86,9 @@ def gen_horoscope(sign, tone):
     text = base.format(sign=sign)
     # Add small twist
     twists = [
-        "Šodien izvairies no politikas apspriešanas.",
-        "Smaids svešiniekam — izjauks rutīnu.",
-        "Neliels risks sola lielu stāstu, ko pastāstīt."
+        "Сегодня избегай обсуждений политики.", 
+        "Улыбнись незнакомцу — и сломай рутину.",
+        "Небольшой риск сулит большую историю для рассказа."
     ]
     # don't always add twist
     if randint(0, 10) > 6:
@@ -126,11 +126,11 @@ def verify_age():
     # accept form or JSON
     birthdate_str = request.form.get('birthdate') or request.json.get('birthdate') if request.is_json else None
     if not birthdate_str:
-        return {"ok": False, "error": "dzimšanas datums nepieciešams"}, 400
+        return {"ok": False, "error": "birthdate required"}, 400
     try:
         bd = datetime.strptime(birthdate_str, "%Y-%m-%d").date()
     except Exception:
-        return {"ok": False, "error": "nepareizs datuma formāts, lietojiet YYYY-MM-DD"}, 400
+        return {"ok": False, "error": "invalid date format, use YYYY-MM-DD"}, 400
 
     age = calculate_age(bd, date.today())
     allowed = 1 if age > 10 else 0
@@ -146,21 +146,21 @@ def verify_age():
         return jsonify({"ok": True, "allowed": True})
     else:
         session['age_verified'] = False
-        return jsonify({"ok": True, "allowed": False, "reason": "Ieeja atļauta tikai lietotājiem, kas vecāki par 10 gadiem."}), 200
+        return jsonify({"ok": True, "allowed": False, "reason": "Вход разрешён только пользователям старше 10 лет."}), 200
 
 @app.route('/api/generate', methods=['POST'])
 def api_generate():
     if not session.get('age_verified'):
-        return jsonify({"ok": False, "error": "vecuma pārbaude"}), 403
+        return jsonify({"ok": False, "error": "age gate"}), 403
     data = request.get_json() or {}
     sign = data.get('sign')
     tone = data.get('tone', 'normal')
     if not sign:
-        return jsonify({"ok": False, "error": "zīme nepieciešama"}), 400
+        return jsonify({"ok": False, "error": "sign required"}), 400
     # safety: ensure sign is one of known
     allowed_signs = [s[0] for s in SIGNS]
     if sign not in allowed_signs:
-        return jsonify({"ok": False, "error": "nepareiza zīme"}), 400
+        return jsonify({"ok": False, "error": "invalid sign"}), 400
 
     text, sarcasm = gen_horoscope(sign, tone)
     # save request
@@ -168,7 +168,7 @@ def api_generate():
     db.execute("INSERT INTO requests (sign, tone, sarcasm, created_at) VALUES (?, ?, ?, ?)",
                (sign, tone, sarcasm, datetime.utcnow().isoformat()))
     db.commit()
-    return jsonify({"ok": True, "sign": sign, "text": text, "sarcasm": sarcasm, "source": "ģenerēts serverī"})
+    return jsonify({"ok": True, "sign": sign, "text": text, "sarcasm": sarcasm, "source": "server-generated"})
 
 @app.route('/admin/stats')
 def admin_stats():
