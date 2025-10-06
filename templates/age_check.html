@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Проверка возраста — Brutālais Horoskops</title>
+    <title>Lietotāja vecuma pārbaude — Brutālais Horoskops</title>
     <style>
       body {
         display: flex;
@@ -40,20 +40,20 @@
   </head>
   <body>
     <div class="card">
-      <h2>Проверка возраста</h2>
+      <h2>Vecuma pārbaude</h2>
       <p class="muted">
-        Войти могут только пользователи старше 10 лет. Укажите дату рождения.
+        Ieiet lietotnē var tikai lietotāji, kuri ir vecāki par 10 gadiem. Lūdzu, ievadiet savu dzimšanas datumu.
       </p>
 
       <form id="ageForm">
-        <label for="birthdate">Дата рождения</label><br />
+        <label for="birthdate">Dzimšanas datums</label><br />
         <input
           id="birthdate"
           name="birthdate"
           type="date"
           required
         /><br /><br />
-        <button type="submit">Войти</button>
+        <button type="submit">Ieiet</button>
       </form>
 
       <div id="message" style="margin-top: 12px; color: #ff8a8a"></div>
@@ -67,7 +67,7 @@
           const bd = document.getElementById("birthdate").value;
           if (!bd) {
             document.getElementById("message").textContent =
-              "Введите дату рождения";
+              "Ievadiet dzimšanas datumu";
             return;
           }
           try {
@@ -82,11 +82,11 @@
               window.location = "/";
             } else {
               document.getElementById("message").textContent =
-                "Вход разрешён только пользователям старше 10 лет.";
+                "Ieeja atļauta tikai tiem lietotājiem, kuri ir vecāki par 10 gadiem.";
             }
           } catch (err) {
             document.getElementById("message").textContent =
-              "Ошибка проверки. Попробуйте позже.";
+              "Verifikācijas kļūda. Mēģiniet vēlreiz.";
           }
         });
     </script>
