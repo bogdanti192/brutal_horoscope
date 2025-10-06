@@ -52,23 +52,23 @@ def close_connection(exception):
 
 # --- Utilities ---
 SIGNS = [
-  ['Овен','♈'],['Телец','♉'],['Близнецы','♊'],['Рак','♋'],['Лев','♌'],['Дева','♍'],
-  ['Весы','♎'],['Скорпион','♏'],['Стрелец','♐'],['Козерог','♑'],['Водолей','♒'],['Рыбы','♓']
+  ['Aries','♈'],['Taurus','♉'],['Gemini','♊'],['Cancer','♋'],['Leo','♌'],['Vigro','♍'],
+  ['Libra','♎'],['Scorpio','♏'],['Sagittarius','♐'],['Capricon','♑'],['Aquarius','♒'],['Pisces','♓']
 ]
 
 # Simple generator templates (kept safe: no hate speech / no sexual content)
 TEMPLATES = {
     'light': [
-        "{sign} — сегодня уют превыше всего. Сделай вид, что у тебя план.",
-        "{sign} — кофе поможет. А если нет — съешь печенье и притворись мудрецом."
+        "{sign} — šodien komforts ir vissvarīgākais. Izliecies, ka tev ir plāns.",
+        "{sign} — kafija palīdzēs. Un, ja nē, apēd cepumu un izliecies par gudrinieku."
     ],
     'normal': [
-        "{sign} — у тебя получится, если не мешать самому себе. То есть сделай паузу.",
-        "{sign} — несложно быть лучше вчера — немного усилий и сарказм выключается."
+        "{sign} — tu to vari izdarīt, ja pats sev netraucēsi. Tas ir, paņem pārtraukumu.",
+        "{sign} — nav grūti būt labākam nekā vakar – neliela piepūle, un sarkasms izslēdzas."
     ],
     'hard': [
-        "{sign} — твоя энергия впечатляет. Немного потуши огонь, чтобы не поджечь мебель.",
-        "{sign} — если бы импульсивность платили, ты бы жил в другой стране."
+        "{sign} — tava enerģija ir iespaidīga. Nodzēs nedaudz uguni, lai nepiedegtu mēbeles",
+        "{sign} — ja impulsivitāte būtu sodāma, jūs dzīvotu citā valstī."
     ]
 }
 
@@ -86,9 +86,9 @@ def gen_horoscope(sign, tone):
     text = base.format(sign=sign)
     # Add small twist
     twists = [
-        "Сегодня избегай обсуждений политики.", 
-        "Улыбнись незнакомцу — и сломай рутину.",
-        "Небольшой риск сулит большую историю для рассказа."
+        "Šodien izvairieties no politikas apspriešanas.", 
+        "Uzsmaidi svešiniekam un pārtrauc rutīnu.",
+        "Neliels risks nozīmē lielisku stāstu."
     ]
     # don't always add twist
     if randint(0, 10) > 6:
@@ -146,7 +146,7 @@ def verify_age():
         return jsonify({"ok": True, "allowed": True})
     else:
         session['age_verified'] = False
-        return jsonify({"ok": True, "allowed": False, "reason": "Вход разрешён только пользователям старше 10 лет."}), 200
+        return jsonify({"ok": True, "allowed": False, "reason": "Ieeja atļauta tikai lietotājiem, kuri ir vecāki par 10 gadiem."}), 200
 
 @app.route('/api/generate', methods=['POST'])
 def api_generate():
