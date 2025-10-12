@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="lv">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -12,9 +12,19 @@
         height: 100vh;
         margin: 0;
         font-family: Inter, system-ui, Arial;
-        background: #071018;
+        /* плавный переход сверху вниз: чёрный → тёмно-серый → серый */
+        background: linear-gradient(
+          180deg,
+          #000000 0%,
+          #071018 30%,
+          #2b2f31 65%,
+          #55595b 100%
+        );
+        background-attachment: fixed;
+        background-repeat: no-repeat;
         color: #e8eef6;
       }
+
       .card {
         background: linear-gradient(90deg, #b032b7 31%, #e3a8e6 66%);
         border-radius: 10px;
@@ -24,16 +34,52 @@
         width: 100%;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
       }
-      input,
-      button {
+      input {
         padding: 10px;
         border-radius: 8px;
         border: 1px solid rgba(255, 255, 255, 0.06);
         width: 100%;
         box-sizing: border-box;
+        background: rgba(255, 255, 255, 0.06);
+        color: #e8eef6;
+      }
+
+      /* Стили для кнопки "Ieiet" */
+      button[type="submit"] {
+        padding: 10px;
+        border-radius: 8px;
+        width: 100%;
+        box-sizing: border-box;
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        background: #ffffff; /* белый фон */
+        color: #071018; /* тёмный текст */
+        font-weight: 600;
+        cursor: pointer; /* показывает, что элемент кликабельный */
+        transition: transform 120ms ease, box-shadow 120ms ease, filter 120ms;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+      }
+
+      /* Hover — лёгкая подсветка */
+      button[type="submit"]:hover {
+        filter: brightness(0.98);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+      }
+
+      /* Active (нажатие) — имитация вдавленного состояния */
+      button[type="submit"]:active {
+        transform: translateY(2px); /* визуально кнопка вдавлена */
+        box-shadow: inset 0 6px 12px rgba(0, 0, 0, 0.12);
+        /* cursor можно оставить pointer — мы добавим поведение через JS */
+      }
+
+      /* Фокус клавиатурой — видимая рамка (доступность) */
+      button[type="submit"]:focus-visible {
+        outline: 3px solid rgba(200, 107, 205, 0.18);
+        outline-offset: 3px;
       }
       .muted {
-        color: #9aa4b2;
+        color: #ffffff;
         font-size: 13px;
         margin-top: 8px;
       }
@@ -58,7 +104,7 @@
         <button type="submit">Ieiet</button>
       </form>
 
-      <div id="message" style="margin-top: 12px; color: #ff8a8a"></div>
+      <div id="message" style="margin-top: 12px; color: #f14b4b"></div>
     </div>
 
     <script>

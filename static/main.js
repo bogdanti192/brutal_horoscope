@@ -142,3 +142,29 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+// cursor-press.js — изменить курсор при нажатии/удержании кнопки
+(function () {
+  const btn = document.querySelector('button[type="submit"]');
+  if (!btn) return;
+
+  // при зажатии — показать "закрытую руку" (grabbing)
+  function onPressStart() {
+    // ставим курсор и на саму кнопку и на body (на случай быстрой дерганой мыши)
+    btn.style.cursor = "grabbing";
+    document.body.style.cursor = "grabbing";
+  }
+
+  // при отпускании — вернуть pointer
+  function onPressEnd() {
+    btn.style.cursor = "pointer";
+    document.body.style.cursor = ""; // вернёт к стилю по умолчанию
+  }
+
+  btn.addEventListener("mousedown", onPressStart);
+  window.addEventListener("mouseup", onPressEnd);
+
+  // для тач-устройств
+  btn.addEventListener("touchstart", onPressStart, { passive: true });
+  window.addEventListener("touchend", onPressEnd, { passive: true });
+})();
