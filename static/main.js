@@ -1,4 +1,4 @@
-// main.js — фронтенд, обращается к /api/generate
+
 const signsGrid = document.getElementById("signsGrid");
 const preview = document.getElementById("preview");
 const resultCard = document.getElementById("resultCard");
@@ -11,7 +11,7 @@ const shareBtn = document.getElementById("shareBtn");
 
 let tone = "light";
 
-// wire tone buttons
+
 toneButtons.forEach((b) => {
   b.addEventListener("click", (ev) => {
     toneButtons.forEach((x) => x.classList.remove("active"));
@@ -24,7 +24,7 @@ toneButtons.forEach((b) => {
   });
 });
 
-// sign buttons
+
 document.querySelectorAll(".sign").forEach((btn) => {
   btn.addEventListener("click", () => selectSign(btn.dataset.sign));
 });
@@ -90,7 +90,7 @@ shareBtn?.addEventListener("click", async () => {
   }
 });
 
-// main.js (простой и надёжный)
+
 document.addEventListener("DOMContentLoaded", () => {
   const signsGrid = document.getElementById("signsGrid");
   if (!signsGrid) return;
@@ -102,17 +102,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const resText = document.getElementById("resText");
 
   function selectSign(button) {
-    // снять активный класс со всех
+  
     signs.forEach((s) => s.classList.remove("active"));
-    // добавить активный класс выбранному
+    
     button.classList.add("active");
 
-    // взять имя и смайлик
+    
     const name =
       button.dataset.sign || button.querySelector("b")?.textContent || "---";
     const emoji = button.querySelector(".emoji")?.innerHTML || "";
 
-    // обновить превью
+    
     preview.innerHTML = `
       <div style="text-align:center;">
         <div class="emoji" style="font-size:28px">${emoji}</div>
@@ -120,20 +120,20 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
     `;
 
-    // показать и заполнить resultCard (при желании)
+    
     if (resultCard && resSign && resText) {
       resSign.textContent = name;
-      // здесь можно подставить реальный текст; пока заглушка
+      
       resText.textContent = "Šeit būs sarkastisks horoskops izvēlētajam zīmei.";
       resultCard.style.display = "block";
     }
   }
 
-  // навесим обработчики
+  
   signs.forEach((btn) => {
     btn.addEventListener("click", () => selectSign(btn));
 
-    // для гарантированной клавиатурной поддержки (Enter/Space)
+    )
     btn.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
@@ -143,28 +143,28 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// cursor-press.js — изменить курсор при нажатии/удержании кнопки
+
 (function () {
   const btn = document.querySelector('button[type="submit"]');
   if (!btn) return;
 
-  // при зажатии — показать "закрытую руку" (grabbing)
+  
   function onPressStart() {
-    // ставим курсор и на саму кнопку и на body (на случай быстрой дерганой мыши)
+    
     btn.style.cursor = "grabbing";
     document.body.style.cursor = "grabbing";
   }
 
-  // при отпускании — вернуть pointer
+  
   function onPressEnd() {
     btn.style.cursor = "pointer";
-    document.body.style.cursor = ""; // вернёт к стилю по умолчанию
+    document.body.style.cursor = ""; 
   }
 
   btn.addEventListener("mousedown", onPressStart);
   window.addEventListener("mouseup", onPressEnd);
 
-  // для тач-устройств
+  
   btn.addEventListener("touchstart", onPressStart, { passive: true });
   window.addEventListener("touchend", onPressEnd, { passive: true });
 })();
