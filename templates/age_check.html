@@ -12,7 +12,6 @@
         height: 100vh;
         margin: 0;
         font-family: Inter, system-ui, Arial;
-        /* плавный переход сверху вниз: чёрный → тёмно-серый → серый */
         background: linear-gradient(
           180deg,
           #000000 0%,
@@ -44,36 +43,31 @@
         color: #e8eef6;
       }
 
-      /* Стили для кнопки "Ieiet" */
       button[type="submit"] {
         padding: 10px;
         border-radius: 8px;
         width: 100%;
         box-sizing: border-box;
         border: 1px solid rgba(0, 0, 0, 0.06);
-        background: #ffffff; /* белый фон */
-        color: #071018; /* тёмный текст */
+        background: #ffffff;
+        color: #071018;
         font-weight: 600;
-        cursor: pointer; /* показывает, что элемент кликабельный */
+        cursor: pointer;
         transition: transform 120ms ease, box-shadow 120ms ease, filter 120ms;
         box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
       }
 
-      /* Hover — лёгкая подсветка */
       button[type="submit"]:hover {
         filter: brightness(0.98);
         transform: translateY(-2px);
         box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
       }
 
-      /* Active (нажатие) — имитация вдавленного состояния */
       button[type="submit"]:active {
-        transform: translateY(2px); /* визуально кнопка вдавлена */
+        transform: translateY(2px);
         box-shadow: inset 0 6px 12px rgba(0, 0, 0, 0.12);
-        /* cursor можно оставить pointer — мы добавим поведение через JS */
       }
 
-      /* Фокус клавиатурой — видимая рамка (доступность) */
       button[type="submit"]:focus-visible {
         outline: 3px solid rgba(200, 107, 205, 0.18);
         outline-offset: 3px;
@@ -126,7 +120,6 @@
             });
             const data = await res.json();
             if (data.allowed) {
-              // success -> go to home
               window.location = "/";
             } else {
               document.getElementById("message").textContent =
