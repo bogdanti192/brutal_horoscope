@@ -3,7 +3,6 @@ import sqlite3
 from datetime import datetime, date
 from flask import Flask, g, render_template, request, redirect, url_for, session, jsonify, abort
 
-# Config
 DATABASE = 'data.db'
 SECRET_KEY = os.environ.get('SECRET_KEY', 'change-me-in-prod')
 
@@ -72,7 +71,7 @@ TEMPLATES = {
     ]
 }
 
-PROFANITY = ["badword1","badword2"]  # placeholder — можно расширить
+PROFANITY = ["badword1","badword2"]
 
 def sanitize(text):
     for w in PROFANITY:
