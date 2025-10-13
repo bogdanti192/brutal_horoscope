@@ -68,10 +68,11 @@
           15,
           19,
           0.8
-        );
+        ); /* полупрозрачный фон, можно подстроить */
         z-index: 50;
       }
 
+      /* ИЗМЕНЕНИЕ: добавил overflow чтобы анимация сдвига не вылезала за пределы блока */
       .logo {
         width: 1050px;
         height: 52px;
@@ -84,17 +85,20 @@
         font-weight: 800;
         color: #e8eef6;
         box-shadow: 0 6px 20px rgba(255, 107, 107, 0.12);
-        overflow: hidden;
-        position: relative;
+        overflow: hidden; /* ИЗМЕНЕНИЕ */
+        position: relative; /* ИЗМЕНЕНИЕ: для точного позиционирования дочерних элементов при необходимости */
       }
 
+      /* ИЗМЕНЕНИЕ: новый класс для анимированного текста логотипа */
       .logo-text {
         display: inline-block;
-        opacity: 0;
-        transform: translateX(-10px);
+        opacity: 0; /* стартовая прозрачность — для эффекта появления */
+        transform: translateX(-10px); /* стартовый небольшой сдвиг влево */
         animation: logoAppear 19500ms cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+        /* можно регулировать duration и timing-function */
       }
 
+      /* ИЗМЕНЕНИЕ: ключевые кадры анимации появления + лёгкого сдвига */
       @keyframes logoAppear {
         0% {
           opacity: 0;
@@ -171,22 +175,25 @@
         transition: transform var(--transition), box-shadow var(--transition);
         color: #e8eef6;
       }
+      /* Подсветка выбранного знака */
       .sign.active {
         background: linear-gradient(
           180deg,
           #6b2bb0 0%,
           #c86bcd 100%
-        );
+        ); /* фиолетовый градиент */
         color: #fff;
         transform: scale(1.05);
         box-shadow: 0 12px 30px rgba(200, 107, 205, 0.28);
         border: 1px solid rgba(255, 255, 255, 0.06);
       }
 
+      /* Нормальный hover остаётся, но чуть приглушим при active */
       .sign.active:hover {
         transform: scale(1.06);
       }
 
+      /* Доступность — видимая рамка при фокусе клавиатурой */
       .sign:focus-visible {
         outline: 3px solid rgba(200, 107, 205, 0.18);
         outline-offset: 4px;
@@ -300,6 +307,7 @@
         .brand h1 {
           font-size: 16px;
         }
+        /* ИЗМЕНЕНИЕ: на узких экранах уменьшить ширину .logo чтобы не ломать верстку */
         .logo {
           width: 100%;
           height: 48px;
@@ -315,6 +323,7 @@
     <div class="wrap">
       <header class="site">
         <div class="brand">
+          <!-- ИЗМЕНЕНИЕ: обернул текст логотипа в span с классом .logo-text для анимации -->
           <div class="logo">
             <span class="logo-text">Brutālais Horoskops</span>
           </div>
@@ -390,4 +399,4 @@
 
     <script src="{{ url_for('static', filename='main.js') }}"></script>
   </body>
-</html>
+</html> 
